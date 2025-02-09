@@ -1,12 +1,12 @@
 {
     "name": "create-puck-lib",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "BenoitSafari",
     "license": "MIT",
     "bin": {
         "create-puck-lib": "index.mjs"
     },
     "devDependencies": {
-        "digital-lint": "github:digital-net-org/.lint"
+        "digital-lint": "github:digital-net-org/lint"
     }
 }

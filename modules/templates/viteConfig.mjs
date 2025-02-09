@@ -1,7 +1,6 @@
 export const viteConfig = 
 `/// <reference types="vite/client" />
 
-import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
@@ -18,8 +17,12 @@ export default defineConfig({
                 compact: true,
                 strict: true,
             },
+            external: [
+                'react',
+                'react-dom',
+                '@measured/puck'
+            ]
         },
     },
-    plugins: [react()],
 });
 `;
