@@ -13,19 +13,20 @@ const name = Args.get('name');
     pkg.addScript('dev', 'storybook dev -p 6006')
     pkg.addScript('build', 'vite build')
     pkg.addDevDependency('@measured/puck');
-    pkg.addDevDependency('@storybook/addon-essentials');
-    pkg.addDevDependency('@storybook/addon-links');
-    pkg.addDevDependency('@storybook/blocks');
-    pkg.addDevDependency('@storybook/react');
-    pkg.addDevDependency('@storybook/react-vite');
-    pkg.addDevDependency('@storybook/test');
+    pkg.addDevDependency('@storybook/addon-essentials', { version: '^8' });
+    pkg.addDevDependency('@storybook/addon-interactions', { version: '^8' });
+    pkg.addDevDependency('@storybook/addon-links', { version: '^8' });
+    pkg.addDevDependency('@storybook/blocks', { version: '^8' });
+    pkg.addDevDependency('@storybook/react', { version: '^8' });
+    pkg.addDevDependency('@storybook/react-vite', { version: '^8' });
+    pkg.addDevDependency('@storybook/test', { version: '^8' });
     pkg.addDevDependency('@types/node');
     pkg.addDevDependency('@types/react');
-    pkg.addDevDependency('@types/react');
     pkg.addDevDependency('@vitejs/plugin-react');
+    pkg.addDevDependency('github:digital-net-org/.lint');
     pkg.addDevDependency('react', { asPeer: true });
     pkg.addDevDependency('react-dom', { asPeer: true });
-    pkg.addDevDependency('storybook');
+    pkg.addDevDependency('storybook', { version: '^8' });
     pkg.addDevDependency('typescript');
     pkg.addDevDependency('vite');
     pkg.addDevDependency('vite-plugin-dts');

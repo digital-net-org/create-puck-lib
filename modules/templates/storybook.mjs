@@ -1,24 +1,26 @@
 const main = 
-`export default {
-    stories: ['../src/**/*.story.@(tsx)'],
-    addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+`import type { StorybookConfig } from '@storybook/react-vite';
+
+const config: StorybookConfig = {
+    stories: ['../src/**/*.mdx', '../src/**/*.story.@(js|jsx|mjs|ts|tsx)'],
+    addons: ['@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-links'],
     framework: {
         name: '@storybook/react-vite',
         options: {},
     },
 };
+
+export default config;
 `;
 const preview = 
-`import type { Preview, StoryFn } from '@storybook/react';
+`import type { Preview } from '@storybook/react';
 
-export default {
-    decorators: (Story: StoryFn) => Story,
+const preview: Preview = {
     parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
         controls: {
             matchers: {
                 color: /(background|color)$/i,
-                date: /Date$/,
+                date: /Date$/i,
             },
         },
         layout: 'fullscreen',
@@ -28,7 +30,9 @@ export default {
             },
         },
     },
-} satisfies Preview;
+};
+
+export default preview;
 `;
 
 export const storybook = { preview, main }

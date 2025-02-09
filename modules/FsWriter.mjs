@@ -23,10 +23,12 @@ export class FsWriter {
         const base = path || '.';
         await fs.mkdir(join(base, '.storybook'), { recursive: true });
         await fs.mkdir(join(base, 'src'), { recursive: true });
+        await fs.mkdir(join(base, 'src', 'components'), { recursive: true });
         await fs.mkdir(join(base, 'dist'), { recursive: true });
         await fs.writeFile(join(base, 'src', 'index.ts'), src.indexTs);
         await fs.writeFile(join(base, 'src', 'root.tsx'), src.rootTsx);
         await fs.writeFile(join(base, 'src', 'categories.ts'), src.categoriesTs);
+        await fs.writeFile(join(base, 'src', 'components', 'PuckEditor.story.tsx'), src.editorStoryTsx);
         await fs.writeFile(join(base, 'vite.config.ts'), viteConfig);
         await fs.writeFile(join(base, 'tsconfig.json'), tsConfig);
         await fs.writeFile(join(base, '.storybook', 'main.ts'), storybook.main);
