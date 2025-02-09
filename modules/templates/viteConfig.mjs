@@ -9,7 +9,7 @@ export default defineConfig({
         outDir: 'dist',
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            formats: ['es'],
+            formats: ['cjs'],
             fileName: () => 'digital.puck.config.js'
         },
         rollupOptions: {
