@@ -11,7 +11,7 @@ const name = Args.get('name');
 (async () => {
     const pkg = new PackageJson(name)
     pkg.addScript('dev', 'storybook dev -p 6006')
-    pkg.addScript('build', 'vite build')
+    pkg.addScript('build', 'vite build --mode production')
     pkg.addDevDependency('@measured/puck', { asPeer: true });
     pkg.addDevDependency('@storybook/addon-essentials', { version: '^8' });
     pkg.addDevDependency('@storybook/addon-interactions', { version: '^8' });
@@ -22,6 +22,7 @@ const name = Args.get('name');
     pkg.addDevDependency('@storybook/test', { version: '^8' });
     pkg.addDevDependency('@types/node');
     pkg.addDevDependency('@types/react');
+    pkg.addDevDependency('@vitejs/plugin-react');
     pkg.addDevDependency('digital-lint', { version: 'github:digital-net-org/lint#1.0.0' });
     pkg.addDevDependency('react', { asPeer: true });
     pkg.addDevDependency('react-dom', { asPeer: true });

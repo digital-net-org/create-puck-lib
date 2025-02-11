@@ -1,10 +1,11 @@
 export const viteConfig = 
 `/// <reference types="vite/client" />
 
+import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({ 
     build: {
         outDir: 'dist',
         lib: {
@@ -13,16 +14,13 @@ export default defineConfig({
             fileName: () => 'digital.puck.config.js'
         },
         rollupOptions: {
+            input: './src',
             output: {
                 compact: true,
                 strict: true,
             },
-            external: [
-                'react',
-                'react-dom',
-                '@measured/puck'
-            ]
         },
     },
-});
+    plugins: [...(mode === 'production' ? [] : [react()])],
+}));
 `;
