@@ -25,14 +25,15 @@ export class FsWriter {
         await fs.mkdir(join(base, 'src'), { recursive: true });
         await fs.mkdir(join(base, 'src', 'components'), { recursive: true });
         await fs.mkdir(join(base, 'dist'), { recursive: true });
-        await fs.writeFile(join(base, 'src', 'index.ts'), src.indexTs);
-        await fs.writeFile(join(base, 'src', 'root.tsx'), src.rootTsx);
-        await fs.writeFile(join(base, 'src', 'categories.ts'), src.categoriesTs);
-        await fs.writeFile(join(base, 'src', 'components', 'PuckEditor.story.tsx'), src.editorStoryTsx);
+        await fs.writeFile(join(base, 'src', 'index.tsx'), src.indexTsx);
+        await fs.writeFile(join(base, 'src', 'types.ts'), src.typesTs);
+        await fs.writeFile(join(base, 'src', 'components', 'Box.tsx'), src.BoxComponentTsx);
+        await fs.writeFile(join(base, 'src', 'components', 'Paragraph.tsx'), src.ParagraphComponentTsx);
         await fs.writeFile(join(base, 'vite.config.ts'), viteConfig);
         await fs.writeFile(join(base, 'tsconfig.json'), tsConfig);
         await fs.writeFile(join(base, '.storybook', 'main.ts'), storybook.main);
         await fs.writeFile(join(base, '.storybook', 'preview.ts'), storybook.preview);
+        await fs.writeFile(join(base, '.storybook', 'PuckEditor.story.tsx'), src.editorStoryTsx);
     }
 
     static async createFile(path, content) {

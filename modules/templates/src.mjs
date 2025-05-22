@@ -1,41 +1,91 @@
-const rootTsx = 
-`import type { Config } from '@measured/puck';
+const ParagraphComponentTsx =
+`import { PuckComponent, ReactLib } from '../types';
 
-export default {
-    render: ({ children, styles }) => (
-        <div>
-            <style>{styles}</style>
-            {children}
-        </div>
-    ),
-} satisfies Config['root'];
+export function BuildParagraph(React: ReactLib): PuckComponent {
+    return {
+        fields: {
+            content: {
+                type: 'textarea',
+                label: 'Content',
+            },
+        },
+        render: ({ content }) => (
+            <p
+                style={{
+                    minHeight: '1rem',
+                    width: '100%',
+                    padding: '1rem 1rem',
+                }}
+            >
+                {content}
+            </p>
+        ),
+    };
+}
+`
+
+const BoxComponentTsx = 
+`import { PuckComponent, ReactLib } from '../types';
+
+export function BuildBox(React: ReactLib): PuckComponent {
+    return {
+        render: ({ puck: { renderDropZone } }) => (
+            <div style={{ minWidth: 200, minHeight: 200 }}>{renderDropZone({ zone: 'page-content' })}</div>
+        ),
+    };
+}
 `;
 
-const categoriesTs =
-`import { type Config } from '@measured/puck';
+const typesTs =
+`import { Config } from '@measured/puck';
+import type React from 'react';
 
-export default {} satisfies Config['categories'];
+export type PuckComponent = Config['components']['key'];
+export type PuckConfig = Config;
+export type ReactLib = typeof React;
 `;
 
-const indexTs =
-`import { type Config } from '@measured/puck';
-import categories from './categories';
-import root from './root';
+const indexTsx =
+`import { BuildBox } from './components/Box';
+import { BuildParagraph } from './components/Paragraph';
+import { PuckConfig, ReactLib } from './types';
 
-export default {
-    root,
-    categories,
-    components: {
-        //... Add components here
-    },
-} satisfies Config;
+export default function init(React: ReactLib): PuckConfig {
+    return {
+        components: {
+            Box: BuildBox(React),
+            Paragraph: BuildParagraph(React),
+        },
+        categories: {
+            blocks: {
+                title: 'Blocks',
+                components: ['Box'],
+            },
+            typography: {
+                title: 'Typography',
+                components: ['Paragraph'],
+            },
+        },
+        root: {
+            render: ({ children, styles }) => (
+                <div>
+                    <style>{styles}</style>
+                    {children}
+                </div>
+            ),
+        },
+    };
+}
 `;
 
 const editorStoryTsx =
-`import { Puck, Render } from '@measured/puck';
-import '@measured/puck/puck.css';
+`import React from 'react';
+import { Puck, Render } from '@measured/puck';
 import type { Meta, StoryObj } from '@storybook/react';
-import config from '../index';
+import buildConfig from '../src';
+import '@measured/puck/puck.css';
+
+const config = buildConfig(React);
 
 const meta: Meta = {
     title: 'Puck/Editor',
@@ -61,4 +111,4 @@ export const PuckConfigTest: Story = {
 export default meta;
 `;
 
-export const src = { indexTs, categoriesTs, rootTsx, editorStoryTsx };
+export const src = { indexTsx, typesTs, BoxComponentTsx, ParagraphComponentTsx, editorStoryTsx };

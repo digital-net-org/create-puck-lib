@@ -22,3 +22,6 @@ Use the following command to create a new puck lib template
 ```
 npx create-puck-lib --path "path/to/project" --name "name-of-the-project"
 ```
+
+## Warning
+Be aware that you need to export a function that takes `React` as parameter. The library wont load if you don't.
